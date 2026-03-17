@@ -1,0 +1,17 @@
+.map-widget {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+
+  &__map {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  &__controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}

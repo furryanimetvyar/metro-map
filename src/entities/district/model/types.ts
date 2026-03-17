@@ -9,7 +9,7 @@ type DistrictProperties = {
 
 type DistrictGeometry = {
     type: "MultiPolygon";
-    coordinates: [number, number][][][][];
+    coordinates: [number, number][][][];
 };
 
 export type DistrictFeature = {

@@ -1,3 +1,3 @@
-import MapPage from "@/pages/map-page/ui/MapPage.tsx";
+import MainPage from "@/pages/map-page/ui/MainPage.tsx";
 
-export default MapPage;
+export default MainPage;
