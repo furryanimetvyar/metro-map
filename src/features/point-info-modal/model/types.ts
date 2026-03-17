@@ -5,7 +5,7 @@ import type {MckStationFeature} from "@/entities/mck-station";
 import type {MetroStationFeature} from "@/entities/metro-station";
 import type {StreetsPedestrianFeature} from "@/entities/streets-pedestrian";
 import {ItemType} from "@/shared/model/ItemTypeEnum.ts";
-import type {TValue} from "@/shared/types";
+import type {TValue} from "@/shared/model";
 
 export type MapObjectClickPayload =
     | { itemType: typeof ItemType.BusTramStation; data: BusTramStationFeature }
@@ -14,7 +14,6 @@ export type MapObjectClickPayload =
     | { itemType: typeof ItemType.MckStation; data: MckStationFeature }
     | { itemType: typeof ItemType.MetroStation; data: MetroStationFeature }
     | { itemType: typeof ItemType.StreetPedestrian; data: StreetsPedestrianFeature }
-    | { itemType: typeof ItemType.CustomPoint; data: StreetsPedestrianFeature }
 
 export interface ModalData {
     title: string;

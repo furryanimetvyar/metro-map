@@ -8,7 +8,6 @@ import type {MckStationFeature} from "@/entities/mck-station";
 import type {MetroStationFeature} from "@/entities/metro-station";
 import type {StreetsPedestrianFeature} from "@/entities/streets-pedestrian";
 import {MAP_ITEM_NAMES} from "@/shared/config/map-item-names.ts";
-import type {CustomPointFeature} from "@/entities/custom-points/model/types.ts";
 
 const busTramFieldsMapper = (data: BusTramStationFeature): TValue<string>[] => {
     const [lng, lat] = data.geometry.coordinates;
@@ -304,29 +303,6 @@ const streetPedestrianFieldsMapper = (data: StreetsPedestrianFeature): TValue<st
     ]
 }
 
-const customPointFieldsMapper = (data: CustomPointFeature): TValue<string>[] => {
-    const [lng, lat] = data.geometry.coordinates;
-
-    return [
-        {
-            title: 'Название',
-            value: data.properties.name,
-        },
-        {
-            title: 'Тип',
-            value: MAP_ITEM_NAMES[data.properties.type],
-        },
-        {
-            title: 'Описание',
-            value: data.properties.description,
-        },
-        {
-            title: 'Координаты',
-            value: `${lat}, ${lng}`,
-        },
-    ]
-}
-
 const FIELDS_MAPPERS = {
     [ItemType.BusTramStation]: busTramFieldsMapper,
     [ItemType.District]: districtFieldsMapper,
@@ -334,7 +310,6 @@ const FIELDS_MAPPERS = {
     [ItemType.MckStation]: mckStationFieldsMapper,
     [ItemType.MetroStation]: metroStationFieldsMapper,
     [ItemType.StreetPedestrian]: streetPedestrianFieldsMapper,
-    [ItemType.CustomPoint]: customPointFieldsMapper,
 } as const;
 
 

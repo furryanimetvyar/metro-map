@@ -5,16 +5,18 @@ import {
 } from "@/entities/mck-station";
 import type {MapObjectClickPayload} from "@/features/point-info-modal/model/types.ts";
 import {ItemType} from "@/shared/model/ItemTypeEnum.ts";
+import {userPointsStore} from "@/widgets/city-map/model/userPointsStore.ts";
 
 
 export const useMckStationsLayer = (
     onClickCallback: (event: MapObjectClickPayload) => void
 ) => {
     const {mckStationsPoints} = useMckStationsQuery();
+    const customUserPoints = userPointsStore((state) => state.addedMckStations)
 
     const mckStationsLayer = new IconLayer<MckStationFeature>({
         id: 'mck-stations-layer',
-        data: mckStationsPoints,
+        data: [...mckStationsPoints, ...customUserPoints],
         getIcon: (d) => ({
             url: d.properties.icon,
             width: 128,

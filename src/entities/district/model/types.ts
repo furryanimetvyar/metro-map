@@ -1,9 +1,5 @@
 type DistrictProperties = {
-    fid: number;
-    NO: number;
-    CODE: string | null;
     NAME: string;
-    TYPENO: number;
     NAME_AO: string;
 };
 

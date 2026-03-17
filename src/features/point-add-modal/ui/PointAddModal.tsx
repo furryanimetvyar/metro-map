@@ -71,8 +71,11 @@ function PointAddModal({open, onOpenChange, initialCoordinates}: PointAddModalPr
                     </DialogTitle>
                 </DialogHeader>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <label>Название</label>
-                    <Input {...register("name")} required/>
+                    <label>Широта</label>
+                    <Input type={"number"} {...register("latitude")} defaultValue={initialCoordinates?.[1]} required/>
+                    <label>Долгота</label>
+                    <Input type={"number"} {...register("longitude")} defaultValue={initialCoordinates?.[0]} required/>
+                    <Button type={"submit"} >Сохранить</Button>
                     <label>Тип точки</label>
                     <Select defaultValue={ItemType.BusTramStation} {...register("type")}>
                         <SelectTrigger>
@@ -88,13 +91,6 @@ function PointAddModal({open, onOpenChange, initialCoordinates}: PointAddModalPr
                             </SelectGroup>
                         </SelectContent>
                     </Select>
-                    <label>Описание</label>
-                    <Textarea {...register("description")}/>
-                    <label>Широта</label>
-                    <Input type={"number"} {...register("latitude")} defaultValue={initialCoordinates?.[1]} required/>
-                    <label>Долгота</label>
-                    <Input type={"number"} {...register("longitude")} defaultValue={initialCoordinates?.[0]} required/>
-                    <Button type={"submit"} >Сохранить</Button>
                 </form>
             </DialogContent>
     </Dialog>)
