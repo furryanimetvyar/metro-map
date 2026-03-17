@@ -18,7 +18,7 @@ export const useMcdStationsLayer = (
         id: 'mcd-stations-layer',
         data: [...mcdStationsPoints, ...customUserPoints],
         getIcon: (d) => ({
-            url: d.properties.icon,
+            url: d.properties.icon || '/public/pin-icon.png',
             width: 128,
             height: 128,
             anchorY: 128,

@@ -8,7 +8,6 @@ import {ItemType} from "@/shared/model/ItemTypeEnum.ts";
 import {userPointsStore} from "@/widgets/city-map/model/userPointsStore.ts";
 
 
-
 export const useBusTramStationsLayer = (
     onClickCallback: (event: MapObjectClickPayload) => void
 ) => {
@@ -19,7 +18,7 @@ export const useBusTramStationsLayer = (
         id: 'bus-train-stops-layer',
         data: [...busTramStationsPoints, ...customUserPoints],
         getIcon: (d) => ({
-            url: d.properties.icon,
+            url: d.properties.icon || '/public/pin-icon.png',
             width: 128,
             height: 128,
             anchorY: 128,

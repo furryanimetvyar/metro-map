@@ -14,7 +14,6 @@ import PointAddModal from "@/features/point-add-modal";
 import PointInfoModal from "@/features/point-info-modal";
 import type {MapObjectClickPayload} from "@/features/point-info-modal/model/types.ts";
 import {useState} from "react";
-import {useCustomPointsLayer} from "@/widgets/city-map/model/useCustomPointsLayer.ts";
 
 const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 
@@ -25,10 +24,8 @@ const MapWidget = () => {
     const {mckStationsLayer} = useMckStationsLayer(onMapClick);
     const {mcdStationsLayer} = useMcdStationsLayer(onMapClick);
     const {metroStationsLayer} = useMetroStationsLayer(onMapClick);
-    const {customPointsLayer} = useCustomPointsLayer(onMapClick);
 
 
-    console.log(customPointsLayer);
     const layers = [
         districtsLayer,
         streetsPedestrianLayer,
@@ -36,7 +33,6 @@ const MapWidget = () => {
         mckStationsLayer,
         mcdStationsLayer,
         metroStationsLayer,
-        customPointsLayer
     ];
 
     const [viewItemData, setViewItemData] = useState<MapObjectClickPayload | null>(null);

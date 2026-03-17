@@ -18,7 +18,7 @@ export const useMetroStationsLayer = (
         id: 'metro-stations-layer',
         data: [...metroStationsPoints, ...customUserPoints],
         getIcon: (d) => ({
-            url: d.properties.icon,
+            url: d.properties.icon || '/public/pin-icon.png',
             width: 128,
             height: 128,
             anchorY: 128,
