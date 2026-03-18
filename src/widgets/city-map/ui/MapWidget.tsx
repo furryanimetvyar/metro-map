@@ -4,8 +4,8 @@ import { DeckGL } from '@deck.gl/react';
 import { Map } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
-import {AddPoint, type FormValues} from '@/features/add-point';
-import {Button} from "@/shared/ui";
+import { AddPoint, type FormValues } from '@/features/add-point';
+import { Button } from '@/shared/ui';
 
 import { useCreateUserPoint } from '../model/use-create-user-point.ts';
 import PointInfoModal from './PointInfoModal.tsx';
@@ -28,7 +28,7 @@ const MapWidget = () => {
   const { mcdStationsLayer } = useMcdStationsLayer(onMapClick);
   const { metroStationsLayer } = useMetroStationsLayer(onMapClick);
   const { createPoint } = useCreateUserPoint();
-  const {isCreateModeEnabled, setIsCreateModeEnabled} = useCreateUserPoint()
+  const { isCreateModeEnabled, setIsCreateModeEnabled } = useCreateUserPoint();
 
   const layers = [
     districtsLayer,
@@ -67,11 +67,11 @@ const MapWidget = () => {
 
   const onAddButtonClick = (): void => {
     setIsCreateModeEnabled(!isCreateModeEnabled);
-  }
+  };
 
   const onDeckglMapClick = (info: PickingInfo) => {
     if (!isCreateModeEnabled) {
-      return
+      return;
     }
     saveClickCoordinates(info.coordinate);
     openAddModal();
@@ -79,13 +79,13 @@ const MapWidget = () => {
 
   const onPointCreate = (pointData: FormValues, coordinates: [number, number]) => {
     setIsCreateModeEnabled(false);
-    createPoint(pointData, coordinates)
-  }
+    createPoint(pointData, coordinates);
+  };
 
-  const getCursor = ({isDragging}: {isDragging: boolean}): string => {
+  const getCursor = ({ isDragging }: { isDragging: boolean }): string => {
     if (isCreateModeEnabled) return 'crosshair';
     return isDragging ? 'grabbing' : 'grab';
-  }
+  };
 
   return (
     <div className="flex flex-row w-[100vw] h-[100vh]">
@@ -106,7 +106,9 @@ const MapWidget = () => {
           onOpenChange={setViewModalOpen}
           modalData={viewItemData}
         />
-        <Button onClick={onAddButtonClick}>{isCreateModeEnabled ? 'Отмена' : 'Создать точку'}</Button>
+        <Button onClick={onAddButtonClick}>
+          {isCreateModeEnabled ? 'Отмена' : 'Создать точку'}
+        </Button>
         <AddPoint
           open={isAddModalOpen}
           onOpenChange={handleAddModalOpenChange}

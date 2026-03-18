@@ -35,12 +35,19 @@ interface PointAddModalProps {
 }
 
 export default function AddPoint({
-                                   open,
-                                   onOpenChange,
-                                   initialCoordinates,
-                                   onCreatePoint,
+  open,
+  onOpenChange,
+  initialCoordinates,
+  onCreatePoint,
 }: PointAddModalProps) {
-  const { register, handleSubmit, reset, watch, control } = useForm<FormValues>({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    control,
+    formState: { errors },
+  } = useForm<FormValues>({
     defaultValues: {
       type: ItemTypeEnum.BusTramStation,
     },
@@ -64,7 +71,12 @@ export default function AddPoint({
     onOpenChange(false);
   };
 
+  const getFieldClassName = (hasError: boolean) =>
+    hasError ? 'border-red-500 focus-visible:ring-red-500' : '';
+
   const renderField = (field: FieldConfig) => {
+    const hasError = Boolean(errors[field.name]);
+
     switch (field.type) {
       case 'text':
       case 'number':
@@ -73,9 +85,13 @@ export default function AddPoint({
             <label className="text-sm font-medium">{field.label}</label>
             <Input
               type={field.type}
+              className={getFieldClassName(hasError)}
               placeholder={field.placeholder}
               {...register(field.name, { required: field.required })}
             />
+            {errors[field.name] && (
+              <div className="text-sm text-red-500">Это обязательное поле</div>
+            )}
           </div>
         );
       case 'textarea':
@@ -84,8 +100,12 @@ export default function AddPoint({
             <label className="text-sm font-medium">{field.label}</label>
             <Textarea
               placeholder={field.placeholder}
+              className={getFieldClassName(hasError)}
               {...register(field.name, { required: field.required })}
             />
+            {errors[field.name] && (
+              <div className="text-sm text-red-500">Это обязательное поле</div>
+            )}
           </div>
         );
       case 'select':
@@ -101,9 +121,12 @@ export default function AddPoint({
                   value={controllerField.value as string}
                   onValueChange={controllerField.onChange}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className={getFieldClassName(hasError)}>
                     <SelectValue placeholder={field.placeholder} />
                   </SelectTrigger>
+                  {errors[field.name] && (
+                    <div className="text-sm text-red-500">Это обязательное поле</div>
+                  )}
                   <SelectContent position="popper">
                     <SelectGroup>
                       {field.options?.map((opt) => (
@@ -128,7 +151,7 @@ export default function AddPoint({
           <DialogTitle>Добавить точку</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)} className="flex min-h-0 flex-1 flex-col">
-          <div className="min-h-0 flex-1 gap-2 overflow-y-auto flex flex-col p-1">
+          <div className="min-h-0 flex-1 gap-2 overflow-y-auto flex flex-col p-1 pr-4 mr-[-16px]">
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium">Широта</label>
               <Input type="number" step="any" {...register('latitude')} required />

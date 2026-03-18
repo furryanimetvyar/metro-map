@@ -1,10 +1,5 @@
 import type { TValue } from '@/shared/model';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from '@/shared/ui';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/shared/ui';
 
 import type { MapObjectClickPayload, ModalData } from '../model/types.ts';
 import { itemDataMapper } from '../lib/item-data-mapper.ts';
