@@ -8,7 +8,10 @@ import { MAP_ITEM_NAMES } from '@/shared/config';
 import { ItemTypeEnum } from '@/shared/model';
 import type { TValue } from '@/shared/model';
 
-import type { MapObjectClickPayload, ModalData } from '../model/types';
+import type {
+  MapObjectClickPayload,
+  ModalData,
+} from '../../../features/point-info-modal/model/types.ts';
 
 const busTramFieldsMapper = (data: BusTramStationFeature): TValue<string>[] => {
   const [lng, lat] = data.geometry.coordinates;

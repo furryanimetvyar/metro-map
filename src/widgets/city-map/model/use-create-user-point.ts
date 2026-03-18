@@ -1,13 +1,15 @@
 import { userPointsStore } from './user-points-store.ts';
-import { FORM_FIELDS_BY_TYPE } from '@/features/point-add-modal/model/form-fields.ts';
+import { FORM_FIELDS_BY_TYPE } from '@/features/add-point';
 import { ItemTypeEnum } from '@/shared/model';
 import type { BusTramStationFeature } from '@/entities/bus-tram-station';
 import type { McdStationFeature } from '@/entities/mcd-station';
 import type { MetroStationFeature } from '@/entities/metro-station';
 import type { MckStationFeature } from '@/entities/mck-station';
-import type { FormValues, PointItemType } from '@/features/point-add-modal';
+import type { FormValues, PointItemType } from '@/features/add-point';
+import { useState } from 'react';
 
 export const useCreateUserPoint = () => {
+  const [isCreateModeEnabled, setIsCreateModeEnabled] = useState<boolean>(false);
   const addBusTramStation = userPointsStore((state) => state.addBusTramStation);
   const addMcdStation = userPointsStore((state) => state.addMcdStation);
   const addMckStation = userPointsStore((state) => state.addMckStation);
@@ -49,6 +51,8 @@ export const useCreateUserPoint = () => {
   };
 
   return {
+    isCreateModeEnabled,
     createPoint,
+    setIsCreateModeEnabled,
   };
 };

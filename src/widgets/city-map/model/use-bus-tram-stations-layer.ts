@@ -1,15 +1,17 @@
 import { IconLayer } from 'deck.gl';
 
-import type { MapObjectClickPayload } from '@/features/point-info-modal';
 import { type BusTramStationFeature, useBusTramStationsQuery } from '@/entities/bus-tram-station';
 import { ItemTypeEnum } from '@/shared/model';
 
+import type { MapObjectClickPayload } from '../model/types.ts';
 import { userPointsStore } from './user-points-store.ts';
+import { useCreateUserPoint } from '../model/use-create-user-point.ts';
 
 export const useBusTramStationsLayer = (
   onClickCallback: (event: MapObjectClickPayload) => void
 ) => {
   const { busTramStationsPoints } = useBusTramStationsQuery();
+  const { isCreateModeEnabled } = useCreateUserPoint();
   const customUserPoints = userPointsStore((state) => state.addedBusTramStations);
 
   const busTramStationsLayer = new IconLayer<BusTramStationFeature>({
@@ -24,6 +26,7 @@ export const useBusTramStationsLayer = (
     getPosition: (d) => d.geometry.coordinates,
     pickable: true,
     onClick: (pickingInfo) => {
+      if (isCreateModeEnabled) return;
       onClickCallback({
         itemType: ItemTypeEnum.BusTramStation,
         data: pickingInfo.object,

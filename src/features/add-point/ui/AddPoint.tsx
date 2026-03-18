@@ -9,7 +9,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
   Select,
   SelectContent,
   SelectGroup,
@@ -35,11 +34,11 @@ interface PointAddModalProps {
   onCreatePoint: (pointData: FormValues, coordinates: [number, number]) => void;
 }
 
-export default function PointAddModal({
-  open,
-  onOpenChange,
-  initialCoordinates,
-  onCreatePoint,
+export default function AddPoint({
+                                   open,
+                                   onOpenChange,
+                                   initialCoordinates,
+                                   onCreatePoint,
 }: PointAddModalProps) {
   const { register, handleSubmit, reset, watch, control } = useForm<FormValues>({
     defaultValues: {
@@ -124,46 +123,46 @@ export default function PointAddModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogTrigger asChild>
-        <Button>Добавить точку</Button>
-      </DialogTrigger>
-      <DialogContent className="max-h-[85vh] overflow-y-auto">
-        <DialogHeader>
+      <DialogContent className="max-h-[85vh] flex flex-col">
+        <DialogHeader className="p-1">
           <DialogTitle>Добавить точку</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
-          <div className="flex flex-col gap-1">
-            <label className="text-sm font-medium">Широта</label>
-            <Input type="number" step="any" {...register('latitude')} required />
+        <form onSubmit={handleSubmit(onSubmit)} className="flex min-h-0 flex-1 flex-col">
+          <div className="min-h-0 flex-1 gap-2 overflow-y-auto flex flex-col p-1">
+            <div className="flex flex-col gap-1">
+              <label className="text-sm font-medium">Широта</label>
+              <Input type="number" step="any" {...register('latitude')} required />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label className="text-sm font-medium">Долгота</label>
+              <Input type="number" step="any" {...register('longitude')} required />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label className="text-sm font-medium">Тип точки</label>
+              <Controller
+                name="type"
+                control={control}
+                render={({ field }) => (
+                  <Select value={field.value as string} onValueChange={field.onChange}>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent position="popper">
+                      <SelectGroup>
+                        {POINT_TYPES.map((item) => (
+                          <SelectItem value={item} key={item}>
+                            {MAP_ITEM_NAMES[item]}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                )}
+              />
+            </div>
+            {fields.map(renderField)}
           </div>
-          <div className="flex flex-col gap-1">
-            <label className="text-sm font-medium">Долгота</label>
-            <Input type="number" step="any" {...register('longitude')} required />
-          </div>
-          <div className="flex flex-col gap-1">
-            <label className="text-sm font-medium">Тип точки</label>
-            <Controller
-              name="type"
-              control={control}
-              render={({ field }) => (
-                <Select value={field.value as string} onValueChange={field.onChange}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent position="popper">
-                    <SelectGroup>
-                      {POINT_TYPES.map((item) => (
-                        <SelectItem value={item} key={item}>
-                          {MAP_ITEM_NAMES[item]}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              )}
-            />
-          </div>
-          {fields.map(renderField)}
+
           <Button type="submit" className="mt-2">
             Сохранить
           </Button>

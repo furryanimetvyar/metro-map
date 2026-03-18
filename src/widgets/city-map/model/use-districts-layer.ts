@@ -1,11 +1,14 @@
 import { GeoJsonLayer } from '@deck.gl/layers';
 
-import type { MapObjectClickPayload } from '@/features/point-info-modal';
+import type { MapObjectClickPayload } from '../model/types.ts';
 import { type DistrictFeature, useDistrictsQuery } from '@/entities/district';
 import { ItemTypeEnum } from '@/shared/model';
 
+import { useCreateUserPoint } from '../model/use-create-user-point.ts';
+
 export const useDistrictsLayer = (onClickCallback: (event: MapObjectClickPayload) => void) => {
   const { districtsFeatures } = useDistrictsQuery();
+  const { isCreateModeEnabled } = useCreateUserPoint();
 
   const districtsLayer = new GeoJsonLayer<DistrictFeature>({
     id: 'district-features',
@@ -16,6 +19,7 @@ export const useDistrictsLayer = (onClickCallback: (event: MapObjectClickPayload
     lineWidthMinPixels: 1,
     pickable: true,
     onClick: (pickingInfo) => {
+      if (isCreateModeEnabled) return;
       onClickCallback({
         itemType: ItemTypeEnum.District,
         data: pickingInfo.object,

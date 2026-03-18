@@ -1,12 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import type { PickingInfo } from 'deck.gl';
 import { DeckGL } from '@deck.gl/react';
 import { Map } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
-import PointAddModal from '@/features/point-add-modal';
-import PointInfoModal from '@/features/point-info-modal';
-import type { MapObjectClickPayload } from '@/features/point-info-modal/model/types.ts';
+import {AddPoint, type FormValues} from '@/features/add-point';
+import {Button} from "@/shared/ui";
 
+import { useCreateUserPoint } from '../model/use-create-user-point.ts';
+import PointInfoModal from './PointInfoModal.tsx';
 import { useStreetsPedestrianLayer } from '../model/use-streets-pedestrian-layer.ts';
 import { useDistrictsLayer } from '../model/use-districts-layer.ts';
 import { useBusTramStationsLayer } from '../model/use-bus-tram-stations-layer.ts';
@@ -14,8 +16,7 @@ import { useMckStationsLayer } from '../model/use-mck-stations-layer.ts';
 import { useMcdStationsLayer } from '../model/use-mcd-stations-layer.ts';
 import { useMetroStationsLayer } from '../model/use-metro-stations-layer.ts';
 import { INITIAL_VIEW_STATE } from '../model/initial-view-state.ts';
-import styles from './MapWidget.module.scss';
-import { useCreateUserPoint } from '@/widgets/city-map/model/use-create-user-point.ts';
+import type { MapObjectClickPayload } from '../model/types.ts';
 
 const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 
@@ -27,6 +28,7 @@ const MapWidget = () => {
   const { mcdStationsLayer } = useMcdStationsLayer(onMapClick);
   const { metroStationsLayer } = useMetroStationsLayer(onMapClick);
   const { createPoint } = useCreateUserPoint();
+  const {isCreateModeEnabled, setIsCreateModeEnabled} = useCreateUserPoint()
 
   const layers = [
     districtsLayer,
@@ -55,42 +57,61 @@ const MapWidget = () => {
     setNewPointCoordinates(coordinates ?? []);
   };
 
-  useEffect(() => {
-    !isAddModalOpen && setNewPointCoordinates([]);
-  }, [isAddModalOpen]);
+  const handleAddModalOpenChange = (open: boolean) => {
+    setAddModalOpen(open);
+
+    if (!open) {
+      setNewPointCoordinates([]);
+    }
+  };
+
+  const onAddButtonClick = (): void => {
+    setIsCreateModeEnabled(!isCreateModeEnabled);
+  }
+
+  const onDeckglMapClick = (info: PickingInfo) => {
+    if (!isCreateModeEnabled) {
+      return
+    }
+    saveClickCoordinates(info.coordinate);
+    openAddModal();
+  };
+
+  const onPointCreate = (pointData: FormValues, coordinates: [number, number]) => {
+    setIsCreateModeEnabled(false);
+    createPoint(pointData, coordinates)
+  }
+
+  const getCursor = ({isDragging}: {isDragging: boolean}): string => {
+    if (isCreateModeEnabled) return 'crosshair';
+    return isDragging ? 'grabbing' : 'grab';
+  }
 
   return (
-    <div className={styles['map-widget']}>
-      <div className={styles['map-widget__map']}>
+    <div className="flex flex-row w-[100vw] h-[100vh]">
+      <div className="relative w-full h-full">
         <DeckGL
           initialViewState={INITIAL_VIEW_STATE}
           controller={true}
           layers={layers}
-          onClick={(info) => {
-            saveClickCoordinates(info.coordinate);
-            if (!info.object) {
-              openAddModal();
-            }
-          }}
+          onClick={onDeckglMapClick}
+          getCursor={getCursor}
         >
           <Map mapStyle={MAP_STYLE} />
         </DeckGL>
       </div>
-      <div className={styles['map-widget__controls']}>
+      <div className="absolute top-2 right-2 z-10">
         <PointInfoModal
           open={isViewModalOpen}
           onOpenChange={setViewModalOpen}
           modalData={viewItemData}
-          onNewPointAdd={() => {
-            setViewModalOpen(false);
-            openAddModal();
-          }}
         />
-        <PointAddModal
+        <Button onClick={onAddButtonClick}>{isCreateModeEnabled ? 'Отмена' : 'Создать точку'}</Button>
+        <AddPoint
           open={isAddModalOpen}
-          onOpenChange={setAddModalOpen}
+          onOpenChange={handleAddModalOpenChange}
           initialCoordinates={newPointCoordinates}
-          onCreatePoint={createPoint}
+          onCreatePoint={onPointCreate}
         />
       </div>
     </div>

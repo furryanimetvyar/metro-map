@@ -1,20 +1,18 @@
-import type { MapObjectClickPayload, ModalData } from '../model/types.ts';
-import { itemDataMapper } from '../lib/item-data-mapper.ts';
 import type { TValue } from '@/shared/model';
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
-  Button,
 } from '@/shared/ui';
+
+import type { MapObjectClickPayload, ModalData } from '../model/types.ts';
+import { itemDataMapper } from '../lib/item-data-mapper.ts';
 
 type PointInfoModalProps = {
   open: boolean;
   modalData: MapObjectClickPayload | null;
   onOpenChange: (open: boolean) => void;
-  onNewPointAdd: () => void;
 };
 
 const DEFAULT_MODAL_DATA: ModalData = {
@@ -22,7 +20,7 @@ const DEFAULT_MODAL_DATA: ModalData = {
   params: [],
 };
 
-function PointInfoModal({ open, onOpenChange, modalData, onNewPointAdd }: PointInfoModalProps) {
+function PointInfoModal({ open, onOpenChange, modalData }: PointInfoModalProps) {
   const modalProcessedData = modalData ? itemDataMapper(modalData) : DEFAULT_MODAL_DATA;
 
   return (
@@ -36,9 +34,6 @@ function PointInfoModal({ open, onOpenChange, modalData, onNewPointAdd }: PointI
             {item.title} - {item.value}
           </div>
         ))}
-        <DialogFooter>
-          <Button onClick={onNewPointAdd}>Добавить новую точку сюда</Button>
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
