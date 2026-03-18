@@ -2,7 +2,7 @@ import {Controller, type SubmitHandler, useForm} from "react-hook-form";
 import {useEffect} from "react";
 
 import {Input, Button, Textarea, Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from "@/shared/ui";
-import {ItemType} from "@/shared/model";
+import {ItemTypeEnum} from "@/shared/model";
 import {MAP_ITEM_NAMES} from "@/shared/config";
 
 import {FORM_FIELDS_BY_TYPE} from "../model/form-fields.ts";
@@ -19,7 +19,7 @@ export default function PointAddModal({open, onOpenChange, initialCoordinates, o
 
     const {register, handleSubmit, reset, watch, control} = useForm<FormValues>({
         defaultValues: {
-            type: ItemType.BusTramStation,
+            type: ItemTypeEnum.BusTramStation,
         },
     });
 
@@ -28,7 +28,7 @@ export default function PointAddModal({open, onOpenChange, initialCoordinates, o
 
     useEffect(() => {
         reset({
-            type: ItemType.BusTramStation,
+            type: ItemTypeEnum.BusTramStation,
             longitude: initialCoordinates?.[0],
             latitude: initialCoordinates?.[1],
         });

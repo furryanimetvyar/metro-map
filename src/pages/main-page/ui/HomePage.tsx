@@ -1,6 +1,6 @@
 import {MapWidget} from "@/widgets/city-map";
 
-const MainPage = () => {
+const HomePage = () => {
 
     return (
         <div>
@@ -9,4 +9,4 @@ const MainPage = () => {
     );
 };
 
-export default MainPage;
+export default HomePage;

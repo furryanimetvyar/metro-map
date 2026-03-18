@@ -1,4 +1,4 @@
-export const ItemType = {
+export const ItemTypeEnum = {
     BusTramStation: 'bus-tram-station',
     District: 'district',
     McdStation: 'mcd-station',
@@ -7,4 +7,4 @@ export const ItemType = {
     StreetPedestrian: 'street-pedestrian',
 } as const;
 
-export type ItemType = (typeof ItemType)[keyof typeof ItemType];
+export type ItemType = (typeof ItemTypeEnum)[keyof typeof ItemTypeEnum];

@@ -7,15 +7,15 @@ import PointAddModal from "@/features/point-add-modal";
 import PointInfoModal from "@/features/point-info-modal";
 import type {MapObjectClickPayload} from "@/features/point-info-modal/model/types.ts";
 
-import {useStreetsPedestrianLayer} from "../model/useStreetsPedestrianLayer.ts";
-import {useDistrictsLayer} from "../model/useDistrictsLayer.ts";
-import {useBusTramStationsLayer} from "../model/useBusTramStationsLayer.ts";
-import {useMckStationsLayer} from "../model/useMckStationsLayer.ts";
-import {useMcdStationsLayer} from "../model/useMcdStationsLayer.ts";
-import {useMetroStationsLayer} from "../model/useMetroStationsLayer.ts";
-import {INITIAL_VIEW_STATE} from "../model/initial-coords.ts";
+import {useStreetsPedestrianLayer} from "../model/use-streets-pedestrian-layer.ts";
+import {useDistrictsLayer} from "../model/use-districts-layer.ts";
+import {useBusTramStationsLayer} from "../model/use-bus-tram-stations-layer.ts";
+import {useMckStationsLayer} from "../model/use-mck-stations-layer.ts";
+import {useMcdStationsLayer} from "../model/use-mcd-stations-layer.ts";
+import {useMetroStationsLayer} from "../model/use-metro-stations-layer.ts";
+import {INITIAL_VIEW_STATE} from "../model/initial-view-state.ts";
 import styles from './MapWidget.module.scss'
-import {useCreateUserPoint} from "@/widgets/city-map/model/useCreateUserPoint.ts";
+import {useCreateUserPoint} from "@/widgets/city-map/model/use-create-user-point.ts";
 
 const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 

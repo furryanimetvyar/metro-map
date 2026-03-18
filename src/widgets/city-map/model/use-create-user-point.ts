@@ -1,6 +1,6 @@
-import {userPointsStore} from "../model/userPointsStore.ts";
+import {userPointsStore} from "./user-points-store.ts";
 import {FORM_FIELDS_BY_TYPE} from "@/features/point-add-modal/model/form-fields.ts";
-import {ItemType} from "@/shared/model";
+import {ItemTypeEnum} from "@/shared/model";
 import type {BusTramStationFeature} from "@/entities/bus-tram-station";
 import type {McdStationFeature} from "@/entities/mcd-station";
 import type {MetroStationFeature} from "@/entities/metro-station";
@@ -23,25 +23,25 @@ export const useCreateUserPoint = () => {
             properties[field.name] = data[field.name] ?? "";
         }
 
-        if (type === ItemType.BusTramStation) {
+        if (type === ItemTypeEnum.BusTramStation) {
             addBusTramStation({
                 type: "Feature",
                 properties: {...properties, icon: ""} as BusTramStationFeature["properties"],
                 geometry: {type: "Point", coordinates},
             });
-        } else if (type === ItemType.McdStation) {
+        } else if (type === ItemTypeEnum.McdStation) {
             addMcdStation({
                 type: "Feature",
                 properties: {...properties, icon: ""} as McdStationFeature["properties"],
                 geometry: {type: "Point", coordinates},
             });
-        } else if (type === ItemType.MetroStation) {
+        } else if (type === ItemTypeEnum.MetroStation) {
             addMetroStation({
                 type: "Feature",
                 properties: {...properties, icon: ""} as MetroStationFeature["properties"],
                 geometry: {type: "Point", coordinates},
             });
-        } else if (type === ItemType.MckStation) {
+        } else if (type === ItemTypeEnum.MckStation) {
             addMckStation({
                 type: "Feature",
                 properties: {...properties, icon: ""} as MckStationFeature["properties"],

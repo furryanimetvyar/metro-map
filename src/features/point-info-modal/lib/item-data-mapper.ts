@@ -5,7 +5,7 @@ import type {MckStationFeature} from "@/entities/mck-station";
 import type {MetroStationFeature} from "@/entities/metro-station";
 import type {StreetsPedestrianFeature} from "@/entities/streets-pedestrian";
 import {MAP_ITEM_NAMES} from "@/shared/config";
-import {ItemType} from "@/shared/model";
+import {ItemTypeEnum} from "@/shared/model";
 import type {TValue} from "@/shared/model";
 
 import type {MapObjectClickPayload, ModalData} from "../model/types";
@@ -305,12 +305,12 @@ const streetPedestrianFieldsMapper = (data: StreetsPedestrianFeature): TValue<st
 }
 
 const FIELDS_MAPPERS = {
-    [ItemType.BusTramStation]: busTramFieldsMapper,
-    [ItemType.District]: districtFieldsMapper,
-    [ItemType.McdStation]: mcdStationFieldsMapper,
-    [ItemType.MckStation]: mckStationFieldsMapper,
-    [ItemType.MetroStation]: metroStationFieldsMapper,
-    [ItemType.StreetPedestrian]: streetPedestrianFieldsMapper,
+    [ItemTypeEnum.BusTramStation]: busTramFieldsMapper,
+    [ItemTypeEnum.District]: districtFieldsMapper,
+    [ItemTypeEnum.McdStation]: mcdStationFieldsMapper,
+    [ItemTypeEnum.MckStation]: mckStationFieldsMapper,
+    [ItemTypeEnum.MetroStation]: metroStationFieldsMapper,
+    [ItemTypeEnum.StreetPedestrian]: streetPedestrianFieldsMapper,
 } as const;
 
 

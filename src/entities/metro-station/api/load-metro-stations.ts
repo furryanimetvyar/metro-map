@@ -1,4 +1,4 @@
-import {loadData} from "@/shared/utils";
+import {loadData} from "@/shared/lib";
 import type {MetroStationFeatureCollection} from "../model/types.ts";
 
 const FETCH_URL = '/data/metroStation.geojson'

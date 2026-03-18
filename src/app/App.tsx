@@ -1,10 +1,10 @@
-import MainPage from "@/pages/main-page";
+import HomePage from "@/pages/main-page";
 
 function App() {
 
   return (
     <main>
-        <MainPage />
+        <HomePage />
     </main>
   )
 }

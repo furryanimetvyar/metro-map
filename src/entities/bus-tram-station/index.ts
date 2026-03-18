@@ -1,4 +1,4 @@
-import {useBusTramStationsQuery} from "./query/busTramStations.query.ts";
+import {useBusTramStationsQuery} from "./model/bus-tram-stations.query.ts";
 import type {BusTramStationFeature, BusTramStationFeatureCollection} from "./model/types.ts";
 
 export {useBusTramStationsQuery}

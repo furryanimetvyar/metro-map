@@ -5,9 +5,9 @@ import {
     type MckStationFeature,
     useMckStationsQuery
 } from "@/entities/mck-station";
-import {ItemType} from "@/shared/model";
+import {ItemTypeEnum} from "@/shared/model";
 
-import {userPointsStore} from "../model/userPointsStore.ts";
+import {userPointsStore} from "./user-points-store.ts";
 
 
 export const useMckStationsLayer = (
@@ -31,7 +31,7 @@ export const useMckStationsLayer = (
         pickable: true,
         onClick: (pickingInfo) => {
             onClickCallback({
-                itemType: ItemType.MckStation,
+                itemType: ItemTypeEnum.MckStation,
                 data: pickingInfo.object
             })
         },

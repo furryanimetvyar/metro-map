@@ -5,9 +5,9 @@ import {
     type BusTramStationFeature,
     useBusTramStationsQuery
 } from "@/entities/bus-tram-station";
-import {ItemType} from "@/shared/model";
+import {ItemTypeEnum} from "@/shared/model";
 
-import {userPointsStore} from "../model/userPointsStore.ts";
+import {userPointsStore} from "./user-points-store.ts";
 
 
 export const useBusTramStationsLayer = (
@@ -29,7 +29,7 @@ export const useBusTramStationsLayer = (
         pickable: true,
         onClick: (pickingInfo) => {
             onClickCallback({
-                itemType: ItemType.BusTramStation,
+                itemType: ItemTypeEnum.BusTramStation,
                 data: pickingInfo.object
             })
         },

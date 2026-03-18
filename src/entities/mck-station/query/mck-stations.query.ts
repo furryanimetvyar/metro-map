@@ -1,7 +1,7 @@
 import {useMemo} from "react";
 import {useQuery} from "@tanstack/react-query";
 
-import {loadMckStations} from "../api/loadMckStations.ts";
+import {loadMckStations} from "../api/load-mck-stations.ts";
 import type {MckStationFeature, MckStationFeatureCollection} from "../model/types.ts"
 
 export function useMckStationsQuery() {

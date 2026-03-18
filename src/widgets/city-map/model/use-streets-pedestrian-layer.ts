@@ -5,7 +5,7 @@ import {
     type StreetsPedestrianFeatureCollection,
     useStreetsPedestriansQuery
 } from "@/entities/streets-pedestrian";
-import {ItemType} from "@/shared/model";
+import {ItemTypeEnum} from "@/shared/model";
 
 
 export const useStreetsPedestrianLayer = (
@@ -24,7 +24,7 @@ export const useStreetsPedestrianLayer = (
         lineWidthMinPixels: 1,
         onClick: (pickingInfo) => {
             onClickCallback({
-                itemType: ItemType.StreetPedestrian,
+                itemType: ItemTypeEnum.StreetPedestrian,
                 data: pickingInfo.object
             })
         },

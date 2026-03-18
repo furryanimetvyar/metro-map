@@ -1,7 +1,7 @@
 import {useMemo} from "react";
 import {useQuery} from "@tanstack/react-query";
 
-import {loadMetroStations} from "../api/loadMetroStations.ts";
+import {loadMetroStations} from "../api/load-metro-stations.ts";
 import type {MetroStationFeature, MetroStationFeatureCollection} from "../model/types.ts"
 
 export function useMetroStationsQuery() {

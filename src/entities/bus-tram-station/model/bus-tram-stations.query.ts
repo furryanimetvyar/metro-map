@@ -1,8 +1,8 @@
 import {useMemo} from "react";
 import {useQuery} from "@tanstack/react-query";
 
-import {loadBusTramStations} from "../api/loadBusTramStations.ts";
-import type {BusTramStationFeature, BusTramStationFeatureCollection} from "../model/types.ts"
+import {loadBusTramStations} from "../api/load-bus-tram-stations.ts";
+import type {BusTramStationFeature, BusTramStationFeatureCollection} from "./types.ts"
 
 export function useBusTramStationsQuery() {
     const { data, isLoading } = useQuery<BusTramStationFeatureCollection>({

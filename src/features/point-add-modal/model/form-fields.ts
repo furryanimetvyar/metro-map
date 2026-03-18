@@ -1,14 +1,14 @@
-import {ItemType} from "@/shared/model";
+import {ItemTypeEnum} from "@/shared/model";
 import type {FieldConfig} from "./types.ts";
 
 type PointItemType =
-    | typeof ItemType.BusTramStation
-    | typeof ItemType.McdStation
-    | typeof ItemType.MckStation
-    | typeof ItemType.MetroStation
+    | typeof ItemTypeEnum.BusTramStation
+    | typeof ItemTypeEnum.McdStation
+    | typeof ItemTypeEnum.MckStation
+    | typeof ItemTypeEnum.MetroStation
 
 export const FORM_FIELDS_BY_TYPE: Record<PointItemType, FieldConfig[]> = {
-    [ItemType.BusTramStation]: [
+    [ItemTypeEnum.BusTramStation]: [
         {
             name: 'name_mpv',
             label: 'Название',
@@ -65,7 +65,7 @@ export const FORM_FIELDS_BY_TYPE: Record<PointItemType, FieldConfig[]> = {
             placeholder: '-',
         },
     ],
-    [ItemType.McdStation]: [
+    [ItemTypeEnum.McdStation]: [
         {
             name: 'name_station',
             label: 'Название станции',
@@ -147,7 +147,7 @@ export const FORM_FIELDS_BY_TYPE: Record<PointItemType, FieldConfig[]> = {
             placeholder: '-',
         },
     ],
-    [ItemType.MckStation]: [
+    [ItemTypeEnum.MckStation]: [
         {
             name: 'name_station',
             label: 'Название станции',
@@ -235,7 +235,7 @@ export const FORM_FIELDS_BY_TYPE: Record<PointItemType, FieldConfig[]> = {
             placeholder: '-',
         },
     ],
-    [ItemType.MetroStation]: [
+    [ItemTypeEnum.MetroStation]: [
         {
             name: 'name_station',
             label: 'Название станции',

@@ -1,4 +1,4 @@
-import {ItemType} from "@/shared/model";
+import {ItemTypeEnum} from "@/shared/model";
 
 export type FieldConfig = {
     name: string
@@ -10,10 +10,10 @@ export type FieldConfig = {
 }
 
 export const POINT_TYPES = [
-    ItemType.BusTramStation,
-    ItemType.McdStation,
-    ItemType.MckStation,
-    ItemType.MetroStation,
+    ItemTypeEnum.BusTramStation,
+    ItemTypeEnum.McdStation,
+    ItemTypeEnum.MckStation,
+    ItemTypeEnum.MetroStation,
 ] as const;
 
 export type FormValues = Record<string, string | number>;

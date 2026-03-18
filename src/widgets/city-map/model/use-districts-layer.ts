@@ -5,7 +5,7 @@ import {
     type DistrictFeature,
     useDistrictsQuery
 } from "@/entities/district";
-import {ItemType} from "@/shared/model";
+import {ItemTypeEnum} from "@/shared/model";
 
 
 export const useDistrictsLayer = (
@@ -23,7 +23,7 @@ export const useDistrictsLayer = (
         pickable: true,
         onClick: (pickingInfo) => {
             onClickCallback({
-                itemType: ItemType.District,
+                itemType: ItemTypeEnum.District,
                 data: pickingInfo.object
             })
         },

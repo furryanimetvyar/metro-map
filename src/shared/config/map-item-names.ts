@@ -1,10 +1,10 @@
-import {ItemType} from "../model";
+import {ItemTypeEnum} from "../model";
 
-export const MAP_ITEM_NAMES: Record<ItemType, string> = {
-    [ItemType.BusTramStation]: 'Автобусная/трамвайная остановка',
-    [ItemType.District]: 'Район',
-    [ItemType.McdStation]: 'Станция МЦД',
-    [ItemType.MckStation]: 'Станция МЦК',
-    [ItemType.MetroStation]: 'Станция метро',
-    [ItemType.StreetPedestrian]: 'Пешеходная улица',
+export const MAP_ITEM_NAMES: Record<ItemTypeEnum, string> = {
+    [ItemTypeEnum.BusTramStation]: 'Автобусная/трамвайная остановка',
+    [ItemTypeEnum.District]: 'Район',
+    [ItemTypeEnum.McdStation]: 'Станция МЦД',
+    [ItemTypeEnum.MckStation]: 'Станция МЦК',
+    [ItemTypeEnum.MetroStation]: 'Станция метро',
+    [ItemTypeEnum.StreetPedestrian]: 'Пешеходная улица',
 }

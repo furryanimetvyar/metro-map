@@ -5,9 +5,9 @@ import {
     type McdStationFeature,
     useMcdStationsQuery
 } from "@/entities/mcd-station";
-import {ItemType} from "@/shared/model";
+import {ItemTypeEnum} from "@/shared/model";
 
-import {userPointsStore} from "../model/userPointsStore.ts";
+import {userPointsStore} from "./user-points-store.ts";
 
 export const useMcdStationsLayer = (
     onClickCallback: (event: MapObjectClickPayload) => void
@@ -30,7 +30,7 @@ export const useMcdStationsLayer = (
         pickable: true,
         onClick: (pickingInfo) => {
             onClickCallback({
-                itemType: ItemType.McdStation,
+                itemType: ItemTypeEnum.McdStation,
                 data: pickingInfo.object
             })
         },

@@ -1,5 +1,5 @@
 import type {DistrictFeatureCollection} from "../model/types.ts";
-import {loadData} from "@/shared/utils";
+import {loadData} from "@/shared/lib";
 
 const FETCH_URL = '/data/districtsLayer.geojson'
 

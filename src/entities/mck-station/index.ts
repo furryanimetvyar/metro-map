@@ -1,4 +1,4 @@
-import {useMckStationsQuery} from "./query/mckStations.query.ts";
+import {useMckStationsQuery} from "./query/mck-stations.query.ts";
 import type {MckStationFeature, MckStationFeatureCollection} from "./model/types.ts";
 
 export {useMckStationsQuery}

@@ -1,7 +1,7 @@
 import {useMemo} from "react";
 import {useQuery} from "@tanstack/react-query";
 
-import {loadDistricts} from "../api/loadDistricts.ts";
+import {loadDistricts} from "../api/load-districts.ts";
 import type {DistrictFeature, DistrictFeatureCollection} from "../model/types.ts"
 
 export function useDistrictsQuery() {

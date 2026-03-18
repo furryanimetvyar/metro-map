@@ -1,4 +1,4 @@
-import {loadData} from "@/shared/utils/data-fetcher.ts";
+import {loadData} from "@/shared/lib";
 import type {StreetsPedestrianFeatureCollection} from "../model/types.ts";
 
 const FETCH_URL = '/data/streetsPedestrian.geojson'
