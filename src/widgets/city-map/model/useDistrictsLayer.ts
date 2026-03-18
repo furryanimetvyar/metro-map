@@ -1,10 +1,11 @@
 import {GeoJsonLayer} from "@deck.gl/layers";
+
+import type {MapObjectClickPayload} from "@/features/point-info-modal";
 import {
     type DistrictFeature,
     useDistrictsQuery
 } from "@/entities/district";
-import type {MapObjectClickPayload} from "@/features/point-info-modal/model/types.ts";
-import {ItemType} from "@/shared/model/ItemTypeEnum.ts";
+import {ItemType} from "@/shared/model";
 
 
 export const useDistrictsLayer = (

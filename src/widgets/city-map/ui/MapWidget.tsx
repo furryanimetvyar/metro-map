@@ -1,6 +1,11 @@
+import {useEffect, useState} from "react";
 import {DeckGL} from '@deck.gl/react';
 import {Map} from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
+
+import PointAddModal from "@/features/point-add-modal";
+import PointInfoModal from "@/features/point-info-modal";
+import type {MapObjectClickPayload} from "@/features/point-info-modal/model/types.ts";
 
 import {useStreetsPedestrianLayer} from "../model/useStreetsPedestrianLayer.ts";
 import {useDistrictsLayer} from "../model/useDistrictsLayer.ts";
@@ -8,12 +13,9 @@ import {useBusTramStationsLayer} from "../model/useBusTramStationsLayer.ts";
 import {useMckStationsLayer} from "../model/useMckStationsLayer.ts";
 import {useMcdStationsLayer} from "../model/useMcdStationsLayer.ts";
 import {useMetroStationsLayer} from "../model/useMetroStationsLayer.ts";
-import {INITIAL_VIEW_STATE} from "../consts/initial-coords.ts";
+import {INITIAL_VIEW_STATE} from "../model/initial-coords.ts";
 import styles from './MapWidget.module.scss'
-import PointAddModal from "@/features/point-add-modal";
-import PointInfoModal from "@/features/point-info-modal";
-import type {MapObjectClickPayload} from "@/features/point-info-modal/model/types.ts";
-import {useEffect, useState} from "react";
+import {useCreateUserPoint} from "@/widgets/city-map/model/useCreateUserPoint.ts";
 
 const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 
@@ -24,6 +26,7 @@ const MapWidget = () => {
     const {mckStationsLayer} = useMckStationsLayer(onMapClick);
     const {mcdStationsLayer} = useMcdStationsLayer(onMapClick);
     const {metroStationsLayer} = useMetroStationsLayer(onMapClick);
+    const { createPoint } = useCreateUserPoint()
 
 
     const layers = [
@@ -79,7 +82,7 @@ const MapWidget = () => {
                     setViewModalOpen(false);
                     openAddModal()
                 }} />
-                <PointAddModal open={isAddModalOpen} onOpenChange={setAddModalOpen} initialCoordinates={newPointCoordinates} />
+                <PointAddModal open={isAddModalOpen} onOpenChange={setAddModalOpen} initialCoordinates={newPointCoordinates} onCreatePoint={createPoint}/>
             </div>
         </div>
     );

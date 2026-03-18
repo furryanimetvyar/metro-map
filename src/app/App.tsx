@@ -1,4 +1,4 @@
-import MainPage from "@/pages/map-page";
+import MainPage from "@/pages/main-page";
 
 function App() {
 

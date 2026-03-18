@@ -1,13 +1,14 @@
-import type {MapObjectClickPayload, ModalData} from "../model/types";
-import {ItemType} from "@/shared/model/ItemTypeEnum.ts";
-import type {TValue} from "@/shared/model";
 import type {BusTramStationFeature} from "@/entities/bus-tram-station";
 import type {DistrictFeature} from "@/entities/district";
 import type {McdStationFeature} from "@/entities/mcd-station";
 import type {MckStationFeature} from "@/entities/mck-station";
 import type {MetroStationFeature} from "@/entities/metro-station";
 import type {StreetsPedestrianFeature} from "@/entities/streets-pedestrian";
-import {MAP_ITEM_NAMES} from "@/shared/config/map-item-names.ts";
+import {MAP_ITEM_NAMES} from "@/shared/config";
+import {ItemType} from "@/shared/model";
+import type {TValue} from "@/shared/model";
+
+import type {MapObjectClickPayload, ModalData} from "../model/types";
 
 const busTramFieldsMapper = (data: BusTramStationFeature): TValue<string>[] => {
     const [lng, lat] = data.geometry.coordinates;

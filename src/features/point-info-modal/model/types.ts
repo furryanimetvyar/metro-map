@@ -4,7 +4,7 @@ import type {McdStationFeature} from "@/entities/mcd-station";
 import type {MckStationFeature} from "@/entities/mck-station";
 import type {MetroStationFeature} from "@/entities/metro-station";
 import type {StreetsPedestrianFeature} from "@/entities/streets-pedestrian";
-import {ItemType} from "@/shared/model/ItemTypeEnum.ts";
+import {ItemType} from "@/shared/model";
 import type {TValue} from "@/shared/model";
 
 export type MapObjectClickPayload =

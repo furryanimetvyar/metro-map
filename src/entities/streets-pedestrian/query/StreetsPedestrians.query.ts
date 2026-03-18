@@ -1,8 +1,8 @@
 import {useQuery} from "@tanstack/react-query";
-import {loadStreetsPedestrians} from "../api/loadStreetsPedestrians.ts";
-import type {StreetsPedestrianFeature, StreetsPedestrianFeatureCollection} from "../model/types.ts";
 import {useMemo} from "react";
 
+import {loadStreetsPedestrians} from "../api/loadStreetsPedestrians.ts";
+import type {StreetsPedestrianFeature, StreetsPedestrianFeatureCollection} from "../model/types.ts";
 
 export function useStreetsPedestriansQuery() {
     const { data, isLoading } = useQuery<StreetsPedestrianFeatureCollection>({

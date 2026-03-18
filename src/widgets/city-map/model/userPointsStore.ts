@@ -1,9 +1,10 @@
+import {create} from "zustand";
+import {persist} from "zustand/middleware";
+
 import type {BusTramStationFeature} from "@/entities/bus-tram-station";
 import type {MetroStationFeature} from "@/entities/metro-station";
 import type {McdStationFeature} from "@/entities/mcd-station";
 import type {MckStationFeature} from "@/entities/mck-station";
-import {create} from "zustand";
-import {persist} from "zustand/middleware";
 
 type MapEditableStore = {
     addedBusTramStations: BusTramStationFeature[]

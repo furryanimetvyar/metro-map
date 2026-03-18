@@ -1,5 +1,6 @@
 import {useMemo} from "react";
 import {useQuery} from "@tanstack/react-query";
+
 import {loadDistricts} from "../api/loadDistricts.ts";
 import type {DistrictFeature, DistrictFeatureCollection} from "../model/types.ts"
 

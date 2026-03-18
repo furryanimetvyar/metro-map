@@ -1,4 +1,3 @@
-
 export const loadData = async <T> (path: string): Promise<T> => {
     const response = await fetch(path, {
         method: 'GET',

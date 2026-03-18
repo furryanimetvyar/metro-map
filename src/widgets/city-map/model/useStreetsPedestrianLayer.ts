@@ -1,10 +1,11 @@
 import {GeoJsonLayer} from "@deck.gl/layers";
+
+import type {MapObjectClickPayload} from "@/features/point-info-modal";
 import {
     type StreetsPedestrianFeatureCollection,
     useStreetsPedestriansQuery
 } from "@/entities/streets-pedestrian";
-import type {MapObjectClickPayload} from "@/features/point-info-modal/model/types.ts";
-import {ItemType} from "@/shared/model/ItemTypeEnum.ts";
+import {ItemType} from "@/shared/model";
 
 
 export const useStreetsPedestrianLayer = (

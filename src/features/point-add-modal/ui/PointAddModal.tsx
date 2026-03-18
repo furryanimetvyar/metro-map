@@ -1,44 +1,21 @@
-import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from "@/shared/ui";
-import {Button} from "@/shared/ui/button.tsx";
 import {Controller, type SubmitHandler, useForm} from "react-hook-form";
-import {ItemType} from "@/shared/model";
-import {Input} from "@/shared/ui/input.tsx";
-import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from "@/shared/ui/select.tsx";
-import {MAP_ITEM_NAMES} from "@/shared/config/map-item-names.ts";
-import {Textarea} from "@/shared/ui/textarea.tsx";
-import {userPointsStore} from "@/widgets/city-map/model/userPointsStore.ts";
 import {useEffect} from "react";
+
+import {Input, Button, Textarea, Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from "@/shared/ui";
+import {ItemType} from "@/shared/model";
+import {MAP_ITEM_NAMES} from "@/shared/config";
+
 import {FORM_FIELDS_BY_TYPE} from "../model/form-fields.ts";
-import type {FieldConfig} from "../model/types.ts";
-import type {BusTramStationFeature} from "@/entities/bus-tram-station";
-import type {McdStationFeature} from "@/entities/mcd-station";
-import type {MckStationFeature} from "@/entities/mck-station";
-import type {MetroStationFeature} from "@/entities/metro-station";
-
-const POINT_TYPES = [
-    ItemType.BusTramStation,
-    ItemType.McdStation,
-    ItemType.MckStation,
-    ItemType.MetroStation,
-] as const;
-
-type PointItemType = (typeof POINT_TYPES)[number];
-
-type FormValues = Record<string, string | number>;
+import {type FieldConfig, type FormValues, POINT_TYPES, type PointItemType} from "../model/types.ts";
 
 interface PointAddModalProps {
     open: boolean;
     onOpenChange: (isOpen: boolean) => void;
     initialCoordinates: number[];
+    onCreatePoint: (pointData: FormValues, coordinates: [number, number]) => void;
 }
 
-
-
-function PointAddModal({open, onOpenChange, initialCoordinates}: PointAddModalProps) {
-    const addBusTramStation = userPointsStore((state) => state.addBusTramStation);
-    const addMcdStation = userPointsStore((state) => state.addMcdStation);
-    const addMckStation = userPointsStore((state) => state.addMckStation);
-    const addMetroStation = userPointsStore((state) => state.addMetroStation);
+export default function PointAddModal({open, onOpenChange, initialCoordinates, onCreatePoint}: PointAddModalProps) {
 
     const {register, handleSubmit, reset, watch, control} = useForm<FormValues>({
         defaultValues: {
@@ -59,38 +36,8 @@ function PointAddModal({open, onOpenChange, initialCoordinates}: PointAddModalPr
 
     const onSubmit: SubmitHandler<FormValues> = (data) => {
         const coordinates: [number, number] = [Number(data.longitude), Number(data.latitude)];
-        const type = data.type as PointItemType;
 
-        const properties: Record<string, unknown> = {};
-        for (const field of FORM_FIELDS_BY_TYPE[type]) {
-            properties[field.name] = data[field.name] ?? "";
-        }
-
-        if (type === ItemType.BusTramStation) {
-            addBusTramStation({
-                type: "Feature",
-                properties: {...properties, icon: ""} as BusTramStationFeature["properties"],
-                geometry: {type: "Point", coordinates},
-            });
-        } else if (type === ItemType.McdStation) {
-            addMcdStation({
-                type: "Feature",
-                properties: {...properties, icon: ""} as McdStationFeature["properties"],
-                geometry: {type: "Point", coordinates},
-            });
-        } else if (type === ItemType.MetroStation) {
-            addMetroStation({
-                type: "Feature",
-                properties: {...properties, icon: ""} as MetroStationFeature["properties"],
-                geometry: {type: "Point", coordinates},
-            });
-        } else if (type === ItemType.MckStation) {
-            addMckStation({
-                type: "Feature",
-                properties: {...properties, icon: ""} as MckStationFeature["properties"],
-                geometry: {type: "Point", coordinates},
-            });
-        }
+        onCreatePoint(data, coordinates);
         onOpenChange(false);
     };
 
@@ -199,5 +146,3 @@ function PointAddModal({open, onOpenChange, initialCoordinates}: PointAddModalPr
         </Dialog>
     );
 }
-
-export default PointAddModal;

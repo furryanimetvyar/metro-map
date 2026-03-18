@@ -1,5 +1,6 @@
 import {loadData} from "@/shared/utils";
-import type {McdStationFeatureCollection} from "@/entities/mcd-station/model/types.ts";
+
+import type {McdStationFeatureCollection} from "../model/types.ts";
 
 const FETCH_URL = '/data/mcdStation.geojson'
 

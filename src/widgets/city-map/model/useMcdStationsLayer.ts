@@ -1,12 +1,13 @@
 import {IconLayer} from "deck.gl";
+
+import type {MapObjectClickPayload} from "@/features/point-info-modal";
 import {
     type McdStationFeature,
     useMcdStationsQuery
 } from "@/entities/mcd-station";
-import type {MapObjectClickPayload} from "@/features/point-info-modal/model/types.ts";
-import {ItemType} from "@/shared/model/ItemTypeEnum.ts";
-import {userPointsStore} from "@/widgets/city-map/model/userPointsStore.ts";
+import {ItemType} from "@/shared/model";
 
+import {userPointsStore} from "../model/userPointsStore.ts";
 
 export const useMcdStationsLayer = (
     onClickCallback: (event: MapObjectClickPayload) => void

@@ -1,8 +1,7 @@
-import {Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle} from "@/shared/ui";
-import type {MapObjectClickPayload, ModalData} from "@/features/point-info-modal/model/types.ts";
-import {itemDataMapper} from "@/features/point-info-modal/lib/item-data-mapper.ts";
+import type {MapObjectClickPayload, ModalData} from "../model/types.ts";
+import {itemDataMapper} from "../lib/item-data-mapper.ts";
 import type {TValue} from "@/shared/model";
-import {Button} from "@/shared/ui/button.tsx";
+import {Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, Button} from "@/shared/ui";
 
 type PointInfoModalProps = {
     open: boolean;
