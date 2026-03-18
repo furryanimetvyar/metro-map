@@ -32,6 +32,8 @@ interface PointAddModalProps {
     initialCoordinates: number[];
 }
 
+
+
 function PointAddModal({open, onOpenChange, initialCoordinates}: PointAddModalProps) {
     const addBusTramStation = userPointsStore((state) => state.addBusTramStation);
     const addMcdStation = userPointsStore((state) => state.addMcdStation);
@@ -64,38 +66,31 @@ function PointAddModal({open, onOpenChange, initialCoordinates}: PointAddModalPr
             properties[field.name] = data[field.name] ?? "";
         }
 
-        switch (type) {
-            case ItemType.BusTramStation:
-                addBusTramStation({
-                    type: "Feature",
-                    properties: {...properties, icon: ""} as BusTramStationFeature["properties"],
-                    geometry: {type: "Point", coordinates},
-                });
-                break;
-            case ItemType.McdStation:
-                addMcdStation({
-                    type: "Feature",
-                    properties: {...properties, icon: ""} as McdStationFeature["properties"],
-                    geometry: {type: "Point", coordinates},
-                });
-                break;
-            case ItemType.MckStation:
-                addMckStation({
-                    type: "Feature",
-                    properties: {...properties, icon: ""} as MckStationFeature["properties"],
-                    geometry: {type: "Point", coordinates},
-                });
-                break;
-            case ItemType.MetroStation:
-                addMetroStation({
-                    type: "Feature",
-                    properties: {...properties, icon: ""} as MetroStationFeature["properties"],
-                    geometry: {type: "Point", coordinates},
-                });
-                break;
-
+        if (type === ItemType.BusTramStation) {
+            addBusTramStation({
+                type: "Feature",
+                properties: {...properties, icon: ""} as BusTramStationFeature["properties"],
+                geometry: {type: "Point", coordinates},
+            });
+        } else if (type === ItemType.McdStation) {
+            addMcdStation({
+                type: "Feature",
+                properties: {...properties, icon: ""} as McdStationFeature["properties"],
+                geometry: {type: "Point", coordinates},
+            });
+        } else if (type === ItemType.MetroStation) {
+            addMetroStation({
+                type: "Feature",
+                properties: {...properties, icon: ""} as MetroStationFeature["properties"],
+                geometry: {type: "Point", coordinates},
+            });
+        } else if (type === ItemType.MckStation) {
+            addMckStation({
+                type: "Feature",
+                properties: {...properties, icon: ""} as MckStationFeature["properties"],
+                geometry: {type: "Point", coordinates},
+            });
         }
-
         onOpenChange(false);
     };
 

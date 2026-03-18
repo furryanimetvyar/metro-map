@@ -7,5 +7,4 @@ export const MAP_ITEM_NAMES: Record<ItemType, string> = {
     [ItemType.MckStation]: 'Станция МЦК',
     [ItemType.MetroStation]: 'Станция метро',
     [ItemType.StreetPedestrian]: 'Пешеходная улица',
-    [ItemType.CustomPoint]: 'Пользовательская точка',
 }

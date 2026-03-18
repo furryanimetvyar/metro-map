@@ -1,11 +1,11 @@
 import {ItemType} from "@/shared/model";
 import type {FieldConfig} from "./types.ts";
 
-type PointItemType = typeof ItemType.BusTramStation
+type PointItemType =
+    | typeof ItemType.BusTramStation
     | typeof ItemType.McdStation
     | typeof ItemType.MckStation
     | typeof ItemType.MetroStation
-    | typeof ItemType.CustomPoint;
 
 export const FORM_FIELDS_BY_TYPE: Record<PointItemType, FieldConfig[]> = {
     [ItemType.BusTramStation]: [
@@ -333,21 +333,6 @@ export const FORM_FIELDS_BY_TYPE: Record<PointItemType, FieldConfig[]> = {
             label: 'Время пешком',
             type: 'text',
             placeholder: '-',
-        },
-    ],
-    [ItemType.CustomPoint]: [
-        {
-            name: 'name',
-            label: 'Название',
-            type: 'text',
-            required: true,
-            placeholder: 'Название точки',
-        },
-        {
-            name: 'description',
-            label: 'Описание',
-            type: 'textarea',
-            placeholder: 'Описание точки',
         },
     ],
 }

@@ -13,7 +13,7 @@ import styles from './MapWidget.module.scss'
 import PointAddModal from "@/features/point-add-modal";
 import PointInfoModal from "@/features/point-info-modal";
 import type {MapObjectClickPayload} from "@/features/point-info-modal/model/types.ts";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 
@@ -45,10 +45,17 @@ const MapWidget = () => {
         setViewModalOpen(true);
     }
 
-    const onExactlyMapClick = (coordinates?: number[]): void => {
-        setNewPointCoordinates(coordinates ?? [])
+    const openAddModal = () => {
         setAddModalOpen(true);
     }
+
+    const saveClickCoordinates = (coordinates?: number[]): void => {
+        setNewPointCoordinates(coordinates ?? [])
+    }
+
+    useEffect(() => {
+        !isAddModalOpen && setNewPointCoordinates([])
+    }, [isAddModalOpen]);
 
     return (
         <div className={styles['map-widget']}>
@@ -57,11 +64,10 @@ const MapWidget = () => {
                         initialViewState={INITIAL_VIEW_STATE}
                         controller={true}
                         layers={layers}
-                        onClick={(info, event) => {
+                        onClick={(info) => {
+                            saveClickCoordinates(info.coordinate)
                             if (!info.object) {
-                                onExactlyMapClick(info.coordinate)
-                            } else {
-                                console.log(info, event);
+                                openAddModal()
                             }
                         }}
                     >
@@ -69,7 +75,10 @@ const MapWidget = () => {
                 </DeckGL>
             </div>
             <div className={styles['map-widget__controls']}>
-                <PointInfoModal open={isViewModalOpen} onOpenChange={setViewModalOpen} modalData={viewItemData}/>
+                <PointInfoModal open={isViewModalOpen} onOpenChange={setViewModalOpen} modalData={viewItemData} onNewPointAdd={() => {
+                    setViewModalOpen(false);
+                    openAddModal()
+                }} />
                 <PointAddModal open={isAddModalOpen} onOpenChange={setAddModalOpen} initialCoordinates={newPointCoordinates} />
             </div>
         </div>
