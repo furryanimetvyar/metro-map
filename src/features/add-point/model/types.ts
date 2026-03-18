@@ -5,7 +5,7 @@ export type FieldConfig = {
   label: string;
   type: 'text' | 'textarea' | 'number' | 'select';
   required?: boolean;
-  options?: Array<{ label: string; value: string }>;
+  options?: { label: string; value: string }[];
   placeholder?: string;
 };
 

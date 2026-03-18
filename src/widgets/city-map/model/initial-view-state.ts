@@ -9,3 +9,5 @@ export const INITIAL_VIEW_STATE: MapViewState = {
   latitude: INITIAL_LATITUDE,
   zoom: INITIAL_ZOOM,
 };
+
+export const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';

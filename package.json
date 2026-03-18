@@ -28,7 +28,6 @@
     "react-hook-form": "^7.71.2",
     "react-map-gl": "^8.1.0",
     "react-router": "^7.13.1",
-    "sass": "^1.98.0",
     "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.2.1",
     "zod": "^4.3.6",

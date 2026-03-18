@@ -1,4 +1,4 @@
-import { useMcdStationsQuery } from './query/mcd-stations.query.ts';
+import { useMcdStationsQuery } from './model/mcd-stations.query.ts';
 import type { McdStationFeature, McdStationFeatureCollection } from './model/types.ts';
 
 export { useMcdStationsQuery };

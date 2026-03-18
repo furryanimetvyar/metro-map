@@ -5,7 +5,7 @@ import { loadStreetsPedestrians } from '../api/load-streets-pedestrians.ts';
 import type {
   StreetsPedestrianFeature,
   StreetsPedestrianFeatureCollection,
-} from '../model/types.ts';
+} from './types.ts';
 
 export function useStreetsPedestriansQuery() {
   const { data, isLoading } = useQuery<StreetsPedestrianFeatureCollection>({

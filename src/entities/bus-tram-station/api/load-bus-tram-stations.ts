@@ -1,4 +1,4 @@
-import { loadData } from '@/shared/lib';
+import { loadData } from '@/shared/api';
 
 import type { BusTramStationFeatureCollection } from '../model/types.ts';
 

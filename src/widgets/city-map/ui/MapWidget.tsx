@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useMemo, useState} from 'react';
 import type { PickingInfo } from 'deck.gl';
 import { DeckGL } from '@deck.gl/react';
 import { Map } from 'react-map-gl/maplibre';
@@ -15,10 +15,8 @@ import { useBusTramStationsLayer } from '../model/use-bus-tram-stations-layer.ts
 import { useMckStationsLayer } from '../model/use-mck-stations-layer.ts';
 import { useMcdStationsLayer } from '../model/use-mcd-stations-layer.ts';
 import { useMetroStationsLayer } from '../model/use-metro-stations-layer.ts';
-import { INITIAL_VIEW_STATE } from '../model/initial-view-state.ts';
+import { INITIAL_VIEW_STATE, MAP_STYLE } from '../model/initial-view-state.ts';
 import type { MapObjectClickPayload } from '../model/types.ts';
-
-const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 
 const MapWidget = () => {
   const { streetsPedestrianLayer } = useStreetsPedestrianLayer(onMapClick);
@@ -30,14 +28,21 @@ const MapWidget = () => {
   const { createPoint } = useCreateUserPoint();
   const { isCreateModeEnabled, setIsCreateModeEnabled } = useCreateUserPoint();
 
-  const layers = [
+  const layers = useMemo(() => [
     districtsLayer,
     streetsPedestrianLayer,
     busTramStationsLayer,
     mckStationsLayer,
     mcdStationsLayer,
     metroStationsLayer,
-  ];
+  ], [
+    districtsLayer,
+    streetsPedestrianLayer,
+    busTramStationsLayer,
+    mckStationsLayer,
+    mcdStationsLayer,
+    metroStationsLayer,
+  ]);
 
   const [viewItemData, setViewItemData] = useState<MapObjectClickPayload | null>(null);
   const [newPointCoordinates, setNewPointCoordinates] = useState<number[]>([]);
