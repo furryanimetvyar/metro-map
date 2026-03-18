@@ -1,4 +1,5 @@
 import { IconLayer } from 'deck.gl';
+import { useMemo } from 'react';
 
 import type { MapObjectClickPayload } from '../model/types.ts';
 import { type McdStationFeature, useMcdStationsQuery } from '@/entities/mcd-station';
@@ -12,27 +13,31 @@ export const useMcdStationsLayer = (onClickCallback: (event: MapObjectClickPaylo
   const { isCreateModeEnabled } = useCreateUserPoint();
   const customUserPoints = userPointsStore((state) => state.addedMcdStations);
 
-  const mcdStationsLayer = new IconLayer<McdStationFeature>({
-    id: 'mcd-stations-layer',
-    data: [...mcdStationsPoints, ...customUserPoints],
-    getIcon: (d) => ({
-      url: d.properties.icon || '/public/pin-icon.png',
-      width: 128,
-      height: 128,
-      anchorY: 128,
-    }),
-    getPosition: (d) => d.geometry.coordinates,
-    sizeUnits: 'pixels',
-    getSize: 25,
-    pickable: true,
-    onClick: (pickingInfo) => {
-      if (isCreateModeEnabled) return;
-      onClickCallback({
-        itemType: ItemTypeEnum.McdStation,
-        data: pickingInfo.object,
-      });
-    },
-  });
+  const mcdStationsLayer = useMemo(
+    () =>
+      new IconLayer<McdStationFeature>({
+        id: 'mcd-stations-layer',
+        data: [...mcdStationsPoints, ...customUserPoints],
+        getIcon: (feature) => ({
+          url: feature.properties.icon || '/public/pin-icon.png',
+          width: 128,
+          height: 128,
+          anchorY: 128,
+        }),
+        getPosition: (feature) => feature.geometry.coordinates,
+        sizeUnits: 'pixels',
+        getSize: 25,
+        pickable: true,
+        onClick: (pickingInfo) => {
+          if (isCreateModeEnabled) return;
+          onClickCallback({
+            itemType: ItemTypeEnum.McdStation,
+            data: pickingInfo.object,
+          });
+        },
+      }),
+    [mcdStationsPoints, customUserPoints, onClickCallback, isCreateModeEnabled],
+  );
   return {
     mcdStationsLayer,
   };

@@ -1,4 +1,5 @@
 import { IconLayer } from 'deck.gl';
+import { useMemo } from 'react';
 
 import { type MckStationFeature, useMckStationsQuery } from '@/entities/mck-station';
 import { ItemTypeEnum } from '@/shared/model';
@@ -12,27 +13,31 @@ export const useMckStationsLayer = (onClickCallback: (event: MapObjectClickPaylo
   const { isCreateModeEnabled } = useCreateUserPoint();
   const customUserPoints = userPointsStore((state) => state.addedMckStations);
 
-  const mckStationsLayer = new IconLayer<MckStationFeature>({
-    id: 'mck-stations-layer',
-    data: [...mckStationsPoints, ...customUserPoints],
-    getIcon: (d) => ({
-      url: d.properties.icon || '/public/pin-icon.png',
-      width: 128,
-      height: 128,
-      anchorY: 128,
-    }),
-    getPosition: (d) => d.geometry.coordinates,
-    sizeUnits: 'pixels',
-    getSize: 25,
-    pickable: true,
-    onClick: (pickingInfo) => {
-      if (isCreateModeEnabled) return;
-      onClickCallback({
-        itemType: ItemTypeEnum.MckStation,
-        data: pickingInfo.object,
-      });
-    },
-  });
+  const mckStationsLayer = useMemo(
+    () =>
+      new IconLayer<MckStationFeature>({
+        id: 'mck-stations-layer',
+        data: [...mckStationsPoints, ...customUserPoints],
+        getIcon: (feature) => ({
+          url: feature.properties.icon || '/public/pin-icon.png',
+          width: 128,
+          height: 128,
+          anchorY: 128,
+        }),
+        getPosition: (feature) => feature.geometry.coordinates,
+        sizeUnits: 'pixels',
+        getSize: 25,
+        pickable: true,
+        onClick: (pickingInfo) => {
+          if (isCreateModeEnabled) return;
+          onClickCallback({
+            itemType: ItemTypeEnum.MckStation,
+            data: pickingInfo.object,
+          });
+        },
+      }),
+    [mckStationsPoints, customUserPoints, onClickCallback, isCreateModeEnabled],
+  );
   return {
     mckStationsLayer,
   };

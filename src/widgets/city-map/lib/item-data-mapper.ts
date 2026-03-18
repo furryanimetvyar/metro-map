@@ -11,7 +11,7 @@ import type { TValue } from '@/shared/model';
 import type {
   MapObjectClickPayload,
   ModalData,
-} from '../../../features/point-info-modal/model/types.ts';
+} from '../model/types.ts';
 
 const busTramFieldsMapper = (data: BusTramStationFeature): TValue<string>[] => {
   const [lng, lat] = data.geometry.coordinates;
@@ -307,18 +307,28 @@ const streetPedestrianFieldsMapper = (data: StreetsPedestrianFeature): TValue<st
   ];
 };
 
-const FIELDS_MAPPERS = {
+type MapItemType = MapObjectClickPayload['itemType'];
+
+type FieldMappers = {
+  [K in MapItemType]: (
+      data: Extract<MapObjectClickPayload, { itemType: K }>['data']
+  ) => TValue<string>[];
+};
+
+const FIELDS_MAPPERS: FieldMappers = {
   [ItemTypeEnum.BusTramStation]: busTramFieldsMapper,
   [ItemTypeEnum.District]: districtFieldsMapper,
   [ItemTypeEnum.McdStation]: mcdStationFieldsMapper,
   [ItemTypeEnum.MckStation]: mckStationFieldsMapper,
   [ItemTypeEnum.MetroStation]: metroStationFieldsMapper,
   [ItemTypeEnum.StreetPedestrian]: streetPedestrianFieldsMapper,
-} as const;
+};
 
 export const itemDataMapper = (data: MapObjectClickPayload): ModalData => {
+  const mapper = FIELDS_MAPPERS[data.itemType];
+
   return {
-    title: MAP_ITEM_NAMES[data.itemType],
-    params: FIELDS_MAPPERS[data.itemType](data.data as never),
+    title: MAP_ITEM_NAMES[data.itemType as keyof typeof MAP_ITEM_NAMES],
+    params: mapper(data.data as never),
   };
 };
