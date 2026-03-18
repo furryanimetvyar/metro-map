@@ -1,12 +1,11 @@
-import {MapWidget} from "@/widgets/city-map";
+import { MapWidget } from '@/widgets/city-map';
 
 const HomePage = () => {
-
-    return (
-        <div>
-            <MapWidget />
-        </div>
-    );
+  return (
+    <div>
+      <MapWidget />
+    </div>
+  );
 };
 
 export default HomePage;

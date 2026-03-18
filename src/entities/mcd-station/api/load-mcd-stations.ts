@@ -1,9 +1,9 @@
-import {loadData} from "@/shared/lib";
+import { loadData } from '@/shared/lib';
 
-import type {McdStationFeatureCollection} from "../model/types.ts";
+import type { McdStationFeatureCollection } from '../model/types.ts';
 
-const FETCH_URL = '/data/mcdStation.geojson'
+const FETCH_URL = '/data/mcdStation.geojson';
 
 export const loadMcdStations = async (): Promise<McdStationFeatureCollection> => {
-    return loadData<McdStationFeatureCollection>(FETCH_URL)
-}
+  return loadData<McdStationFeatureCollection>(FETCH_URL);
+};

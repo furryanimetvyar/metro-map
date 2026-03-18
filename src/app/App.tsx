@@ -1,12 +1,11 @@
-import HomePage from "@/pages/main-page";
+import HomePage from '@/pages/main-page';
 
 function App() {
-
   return (
     <main>
-        <HomePage />
+      <HomePage />
     </main>
-  )
+  );
 }
 
-export default App
+export default App;

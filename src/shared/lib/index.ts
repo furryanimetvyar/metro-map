@@ -1,3 +1,3 @@
-import {loadData} from "./data-fetcher.ts";
+import { loadData } from './data-fetcher.ts';
 
-export { loadData }
+export { loadData };

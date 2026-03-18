@@ -1,16 +1,19 @@
-import {useMemo} from "react";
-import {useQuery} from "@tanstack/react-query";
+import { useMemo } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
-import {loadBusTramStations} from "../api/load-bus-tram-stations.ts";
-import type {BusTramStationFeature, BusTramStationFeatureCollection} from "./types.ts"
+import { loadBusTramStations } from '../api/load-bus-tram-stations.ts';
+import type { BusTramStationFeature, BusTramStationFeatureCollection } from './types.ts';
 
 export function useBusTramStationsQuery() {
-    const { data, isLoading } = useQuery<BusTramStationFeatureCollection>({
-        queryKey: ['busTramStations'],
-        queryFn: loadBusTramStations,
-    })
+  const { data, isLoading } = useQuery<BusTramStationFeatureCollection>({
+    queryKey: ['busTramStations'],
+    queryFn: loadBusTramStations,
+  });
 
-    const busTramStationsPoints = useMemo<BusTramStationFeature[]>(() => data?.features?? [], [data])
+  const busTramStationsPoints = useMemo<BusTramStationFeature[]>(
+    () => data?.features ?? [],
+    [data]
+  );
 
-    return {busTramStationsPoints, isLoading}
+  return { busTramStationsPoints, isLoading };
 }

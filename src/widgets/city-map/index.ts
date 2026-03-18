@@ -1,5 +1,3 @@
-import MapWidget from './ui/MapWidget'
+import MapWidget from './ui/MapWidget';
 
-export {
-    MapWidget
-}
+export { MapWidget };

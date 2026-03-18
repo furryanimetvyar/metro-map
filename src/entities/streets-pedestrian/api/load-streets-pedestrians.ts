@@ -1,8 +1,8 @@
-import {loadData} from "@/shared/lib";
-import type {StreetsPedestrianFeatureCollection} from "../model/types.ts";
+import { loadData } from '@/shared/lib';
+import type { StreetsPedestrianFeatureCollection } from '../model/types.ts';
 
-const FETCH_URL = '/data/streetsPedestrian.geojson'
+const FETCH_URL = '/data/streetsPedestrian.geojson';
 
 export async function loadStreetsPedestrians(): Promise<StreetsPedestrianFeatureCollection> {
-    return loadData<StreetsPedestrianFeatureCollection>(FETCH_URL)
+  return loadData<StreetsPedestrianFeatureCollection>(FETCH_URL);
 }

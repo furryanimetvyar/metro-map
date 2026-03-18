@@ -1,16 +1,16 @@
-import {useMemo} from "react";
-import {useQuery} from "@tanstack/react-query";
+import { useMemo } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
-import {loadDistricts} from "../api/load-districts.ts";
-import type {DistrictFeature, DistrictFeatureCollection} from "../model/types.ts"
+import { loadDistricts } from '../api/load-districts.ts';
+import type { DistrictFeature, DistrictFeatureCollection } from '../model/types.ts';
 
 export function useDistrictsQuery() {
-    const { data, isLoading } = useQuery<DistrictFeatureCollection>({
-        queryKey: ['districts'],
-        queryFn: loadDistricts,
-    })
+  const { data, isLoading } = useQuery<DistrictFeatureCollection>({
+    queryKey: ['districts'],
+    queryFn: loadDistricts,
+  });
 
-    const districtsFeatures = useMemo<DistrictFeature[]>(() => data?.features ?? [], [data])
+  const districtsFeatures = useMemo<DistrictFeature[]>(() => data?.features ?? [], [data]);
 
-    return {districtsFeatures, isLoading}
+  return { districtsFeatures, isLoading };
 }

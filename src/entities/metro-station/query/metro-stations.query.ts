@@ -1,16 +1,16 @@
-import {useMemo} from "react";
-import {useQuery} from "@tanstack/react-query";
+import { useMemo } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
-import {loadMetroStations} from "../api/load-metro-stations.ts";
-import type {MetroStationFeature, MetroStationFeatureCollection} from "../model/types.ts"
+import { loadMetroStations } from '../api/load-metro-stations.ts';
+import type { MetroStationFeature, MetroStationFeatureCollection } from '../model/types.ts';
 
 export function useMetroStationsQuery() {
-    const { data, isLoading } = useQuery<MetroStationFeatureCollection>({
-        queryKey: ['metroStations'],
-        queryFn: loadMetroStations,
-    })
+  const { data, isLoading } = useQuery<MetroStationFeatureCollection>({
+    queryKey: ['metroStations'],
+    queryFn: loadMetroStations,
+  });
 
-    const metroStationsPoints = useMemo<MetroStationFeature[]>(() => data?.features ?? [], [data])
+  const metroStationsPoints = useMemo<MetroStationFeature[]>(() => data?.features ?? [], [data]);
 
-    return {metroStationsPoints, isLoading}
+  return { metroStationsPoints, isLoading };
 }

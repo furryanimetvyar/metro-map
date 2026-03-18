@@ -1,20 +1,20 @@
 type DistrictProperties = {
-    NAME: string;
-    NAME_AO: string;
+  NAME: string;
+  NAME_AO: string;
 };
 
 type DistrictGeometry = {
-    type: "MultiPolygon";
-    coordinates: [number, number][][][];
+  type: 'MultiPolygon';
+  coordinates: [number, number][][][];
 };
 
 export type DistrictFeature = {
-    type: "Feature";
-    properties: DistrictProperties;
-    geometry: DistrictGeometry;
+  type: 'Feature';
+  properties: DistrictProperties;
+  geometry: DistrictGeometry;
 };
 
 export type DistrictFeatureCollection = {
-    type: "FeatureCollection";
-    features: DistrictFeature[];
+  type: 'FeatureCollection';
+  features: DistrictFeature[];
 };

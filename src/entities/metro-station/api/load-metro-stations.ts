@@ -1,8 +1,8 @@
-import {loadData} from "@/shared/lib";
-import type {MetroStationFeatureCollection} from "../model/types.ts";
+import { loadData } from '@/shared/lib';
+import type { MetroStationFeatureCollection } from '../model/types.ts';
 
-const FETCH_URL = '/data/metroStation.geojson'
+const FETCH_URL = '/data/metroStation.geojson';
 
 export const loadMetroStations = async (): Promise<MetroStationFeatureCollection> => {
-    return loadData<MetroStationFeatureCollection>(FETCH_URL)
-}
+  return loadData<MetroStationFeatureCollection>(FETCH_URL);
+};
