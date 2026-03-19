@@ -9,7 +9,7 @@ npm install
 Запуск дев-сервера (http://localhost:3000):
 
 ```bash
-npm install
+npm run dev
 ```
 
 eslint и prettier:
