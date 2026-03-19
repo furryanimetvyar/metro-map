@@ -1,4 +1,4 @@
-import {type ItemType, ItemTypeEnum} from '../model';
+import { type ItemType, ItemTypeEnum } from '../model';
 
 export const MAP_ITEM_NAMES: Record<ItemType, string> = {
   [ItemTypeEnum.BusTramStation]: 'Автобусная/трамвайная остановка',

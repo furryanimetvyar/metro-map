@@ -38,7 +38,7 @@ export const useBusTramStationsLayer = (
         sizeUnits: 'pixels',
         getSize: 25,
       }),
-    [busTramStationsPoints, customUserPoints, onClickCallback, isCreateModeEnabled],
+    [busTramStationsPoints, customUserPoints, onClickCallback, isCreateModeEnabled]
   );
   return {
     busTramStationsLayer,

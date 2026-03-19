@@ -29,7 +29,7 @@ export const useDistrictsLayer = (onClickCallback: (event: MapObjectClickPayload
           });
         },
       }),
-    [districtsFeatures, onClickCallback, isCreateModeEnabled],
+    [districtsFeatures, onClickCallback, isCreateModeEnabled]
   );
   return {
     districtsLayer,

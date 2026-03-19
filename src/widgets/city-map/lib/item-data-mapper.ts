@@ -8,10 +8,7 @@ import { MAP_ITEM_NAMES } from '@/shared/config';
 import { ItemTypeEnum } from '@/shared/model';
 import type { TValue } from '@/shared/model';
 
-import type {
-  MapObjectClickPayload,
-  ModalData,
-} from '../model/types.ts';
+import type { MapObjectClickPayload, ModalData } from '../model/types.ts';
 
 const busTramFieldsMapper = (data: BusTramStationFeature): TValue<string>[] => {
   const [lng, lat] = data.geometry.coordinates;
@@ -311,7 +308,7 @@ type MapItemType = MapObjectClickPayload['itemType'];
 
 type FieldMappers = {
   [K in MapItemType]: (
-      data: Extract<MapObjectClickPayload, { itemType: K }>['data']
+    data: Extract<MapObjectClickPayload, { itemType: K }>['data']
   ) => TValue<string>[];
 };
 

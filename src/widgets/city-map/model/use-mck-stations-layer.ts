@@ -36,7 +36,7 @@ export const useMckStationsLayer = (onClickCallback: (event: MapObjectClickPaylo
           });
         },
       }),
-    [mckStationsPoints, customUserPoints, onClickCallback, isCreateModeEnabled],
+    [mckStationsPoints, customUserPoints, onClickCallback, isCreateModeEnabled]
   );
   return {
     mckStationsLayer,

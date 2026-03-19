@@ -36,7 +36,7 @@ export const useMetroStationsLayer = (onClickCallback: (event: MapObjectClickPay
           });
         },
       }),
-    [metroStationsPoints, customUserPoints, onClickCallback, isCreateModeEnabled],
+    [metroStationsPoints, customUserPoints, onClickCallback, isCreateModeEnabled]
   );
   return {
     metroStationsLayer,

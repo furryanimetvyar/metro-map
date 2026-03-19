@@ -36,7 +36,7 @@ export const useMcdStationsLayer = (onClickCallback: (event: MapObjectClickPaylo
           });
         },
       }),
-    [mcdStationsPoints, customUserPoints, onClickCallback, isCreateModeEnabled],
+    [mcdStationsPoints, customUserPoints, onClickCallback, isCreateModeEnabled]
   );
   return {
     mcdStationsLayer,

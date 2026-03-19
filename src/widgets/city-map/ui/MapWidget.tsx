@@ -1,4 +1,4 @@
-import {useMemo, useState} from 'react';
+import { useMemo, useState } from 'react';
 import type { PickingInfo } from 'deck.gl';
 import { DeckGL } from '@deck.gl/react';
 import { Map } from 'react-map-gl/maplibre';
@@ -28,21 +28,24 @@ const MapWidget = () => {
   const { createPoint } = useCreateUserPoint();
   const { isCreateModeEnabled, setIsCreateModeEnabled } = useCreateUserPoint();
 
-  const layers = useMemo(() => [
-    districtsLayer,
-    streetsPedestrianLayer,
-    busTramStationsLayer,
-    mckStationsLayer,
-    mcdStationsLayer,
-    metroStationsLayer,
-  ], [
-    districtsLayer,
-    streetsPedestrianLayer,
-    busTramStationsLayer,
-    mckStationsLayer,
-    mcdStationsLayer,
-    metroStationsLayer,
-  ]);
+  const layers = useMemo(
+    () => [
+      districtsLayer,
+      streetsPedestrianLayer,
+      busTramStationsLayer,
+      mckStationsLayer,
+      mcdStationsLayer,
+      metroStationsLayer,
+    ],
+    [
+      districtsLayer,
+      streetsPedestrianLayer,
+      busTramStationsLayer,
+      mckStationsLayer,
+      mcdStationsLayer,
+      metroStationsLayer,
+    ]
+  );
 
   const [viewItemData, setViewItemData] = useState<MapObjectClickPayload | null>(null);
   const [newPointCoordinates, setNewPointCoordinates] = useState<number[]>([]);

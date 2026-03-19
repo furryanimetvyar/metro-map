@@ -35,7 +35,7 @@ export const useStreetsPedestrianLayer = (
           });
         },
       }),
-    [streetsPedestrians, onClickCallback, isCreateModeEnabled],
+    [streetsPedestrians, onClickCallback, isCreateModeEnabled]
   );
   return {
     streetsPedestrianLayer,
